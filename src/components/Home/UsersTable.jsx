@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteUser, getUsers } from '../../reduxSlices/usersSlice';
 import MainModal from '../MainModal';
 import CreateForm from '../_common/Forms/CreateForm';
+import toast from 'react-hot-toast';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -72,8 +73,10 @@ export default function UsersTable() {
             try {
                 // eslint-disable-next-line no-unused-vars
                 const resData = await deleteUsers(userId);
+                toast.success("User is deleted successfully")
             } catch {
                 // console.log(resData);
+                toast.error("User deletion is failed!")
             }
         }
         deleteUserFromBackend();

@@ -5,6 +5,7 @@ import { number, object, string } from "yup";
 import { addUser, updateUser } from "../../../../reduxSlices/usersSlice";
 import { addUsers, updateUsers } from "../../../../../api/users";
 import PropTypes from "prop-types"
+import toast from "react-hot-toast";
 
 
 const CreateForm = ({ mode, userId }) => {
@@ -42,18 +43,20 @@ const CreateForm = ({ mode, userId }) => {
                         dispatch(addUser(resData))
                     }
                     addUserFromBackend();
+                    toast.success("User is added successfully");
                 } else if (mode === "update") {
 
                     const updateUserFromBackend = async () => {
                         const resData = await updateUsers(userId, values);
-                        console.log(resData)
+                        console.debug(resData)
                         dispatch(updateUser({ id: userId, updatedUser: values }))
                     }
                     updateUserFromBackend();
+                    toast.success("User is updated successfully")
                 }
                 formik.resetForm();
             } catch {
-                console.error("Failed to add/update user")
+                toast.error("Failed to add/update user")
             }
         },
     });
