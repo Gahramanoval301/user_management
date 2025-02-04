@@ -1,7 +1,7 @@
 import { Stack } from '@mui/material'
 import { NavLink } from 'react-router'
 
-const navLinks = [
+export const navLinks = [
   {
     id: 0,
     label: 'Home',
